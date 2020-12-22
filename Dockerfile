@@ -1,15 +1,16 @@
 FROM alpine:latest
 
+COPY ./lighttpd-config/lighttpd.conf lighttpd.conf 
 COPY ./app/ /var/www/localhost/htdocs
 
-COPY ./lighttpd-config/lighttpd.conf lighttpd.conf 
-
 RUN \
+	apk update && \
+	apk upgrade && \
 	apk add lighttpd && \
 	apk add openrc && \
-	rc-update add lighttpd default && \
-	lighttpd -D -f lighttpd.conf
+	rc-update add lighttpd default 
 
-EXPOSE 8484
+EXPOSE 80
 
-ENTRYPOINT /bin/ash
+CMD ["lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
+
