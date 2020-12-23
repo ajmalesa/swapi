@@ -21,7 +21,7 @@ Then run container, mapping container's port 80 to host's port 80:
 docker run -it -d -p 80:80 swapi:1.1
 ```
 
-Open browser and go to localhost:80.
+Open browser and go to <a href="http://localhost:80">localhost</a>
 
 ## View live version
 
