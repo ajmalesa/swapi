@@ -12,9 +12,9 @@ for (let j = 1; j <= 3; j++) {
                 starship.pilots.forEach((pilot) => {
                     axios.get(pilot).then((response) => {
                         document.querySelector("#starships-for-" + (i * j)).innerHTML += `
-                            <li>
+                            <ol>
                                 ${response.data.name}
-                            </li>
+                            </ol>
                         `;
                     }).catch((err) => {
                         document.querySelector("#starships-for-" + (i * j)).innnerHTML = "Could not get pilot. Contact administrator.";
