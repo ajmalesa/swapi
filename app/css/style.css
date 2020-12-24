@@ -5,16 +5,25 @@ html {
 }
 
 .loading-container {
-    min-height: 100vh;
+    min-height: 45vh;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 1;
-    transition: opacity .45s ease-in;
+    transition: opacity .15s ease-in;
+    z-index: -1;
 }
 
 .main-container {
-    animation: fadeIn ease-in .7s;
+    animation: fadeIn ease-in .4s;
+}
+
+.pagination-buttons {
+    /* left: 21%;
+    right: 21%; */
+    top: 65%;
 }
 
 @keyframes fadeIn {

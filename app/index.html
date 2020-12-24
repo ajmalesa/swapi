@@ -11,16 +11,23 @@
 </head>
 
 <body>
-    <div class="loading-container uk-position-cover">
+    <div class="uk-container uk-container-xsmall uk-padding">
+        <h2>Starships - Pilots</h2>
+    </div>
+
+    <div class="loading-container uk-position-absolute">
         <div uk-spinner="ratio: 4.5"></div>
     </div>
 
-    <div class="main-container uk-container uk-container-xsmall uk-padding uk-hidden">
-        <h2>Starships - Pilots</h2>
-
-        <ol id="list-of-starships" class="uk-card uk-card-default uk-padding-small starship-accordion uk-background-muted " uk-accordion>
+    <div class="main-container uk-container uk-container-xsmall">
+        <ol id="list-of-starships" class="uk-card uk-card-default uk-padding-small starship-accordion uk-background-muted" uk-accordion>
 
         </ol>
+
+        <div class="uk-flex uk-flex-between">
+            <button class="uk-button uk-button-default previous-button" disabled>Previous</button>
+            <button class="uk-button uk-button-default next-button" disabled>Next</button>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
