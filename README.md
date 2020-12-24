@@ -1,6 +1,10 @@
 # swapi
 
-## Build and preview locally
+## Requirements:
+
+<a href="https://docs.docker.com/get-docker/">Docker</a>
+
+## Build and preview locally 
 
 On your local machine, clone this repo and cd into repo directory:
 
