@@ -36,10 +36,6 @@ function getNextPageOfStarships(url) {
                             `;
                     })
                     .catch((err) => {
-                        document.querySelector(".loading-container").classList.add("fade-out");
-                        document.querySelector(".main-container").classList.add("fade-in");
-                        document.querySelector(".main-container").classList.remove("uk-hidden");
-                        document.querySelector("#list-of-starships").innerHTML = "<span class='uk-text-danger'>Could not get pilots. Contact administrator.</span>";
                         console.error(err);
                     })
             }
