@@ -52,18 +52,34 @@ function getNextPageOfStarships(url) {
 
         // Allow previous and next button clicks only if previous or next page exists
         if (response.data.previous !== null) {
-            document.querySelector(".previous-button").removeAttribute("disabled");
+            document.querySelector(".previous-button").classList.remove("uk-invisible");
         } else {
-            document.querySelector(".previous-button").setAttribute("disabled", "");
+            document.querySelector(".previous-button").classList.add("uk-invisible");
         }
         if (response.data.next !== null) {
-            document.querySelector(".next-button").removeAttribute("disabled");
+            document.querySelector(".next-button").classList.remove("uk-invisible");
         } else {
-            document.querySelector(".next-button").setAttribute("disabled", "");
+            document.querySelector(".next-button").classList.add("uk-invisible");
         }
 
         // Remove last divider on each page
         document.querySelectorAll(".divider")[document.querySelectorAll(".divider").length - 1].remove();
+
+        // Setup pagination
+        let totalPages = Math.ceil(response.data.count / 10);
+
+        document.querySelector(".page-numbers").innerHTML = ``;
+        for (let i = 1; i <= totalPages; i++) {
+            if (i == currentPage) {
+                document.querySelector(".page-numbers").innerHTML += `
+                    <li class="uk-active"><span class="uk-text-primary">${i}</span></li>
+                `;
+            } else {
+                document.querySelector(".page-numbers").innerHTML += `
+                    <li><a class="page-number" page=${i}>${i}</a></li>
+                `;
+            }
+        }
 
         // Fade in the main content and fade out the loading spinner
         document.querySelector(".main-container").classList.remove("uk-hidden");
@@ -84,16 +100,33 @@ function getNextPageOfStarships(url) {
 // Call function defined above, which will keep being called as long as there are more pages of starships
 getNextPageOfStarships(initialPage);
 
-// Load next page content if next page button is clicked
+// Load next page content if next page button is selected
 document.querySelector(".next-button").addEventListener("click", () => {
+    currentPage = parseInt(currentPage);
     currentPage += 1;
     let nextPage = "https://swapi.dev/api/starships/?page=" + currentPage;
     getNextPageOfStarships(nextPage);
 })
 
-// Load previous page content if previous page button is clicked
+// Load previous page content if previous page button is selected
 document.querySelector(".previous-button").addEventListener("click", () => {
     currentPage -= 1;
     let prevPage = "https://swapi.dev/api/starships/?page=" + currentPage;
     getNextPageOfStarships(prevPage);
 })
+
+// Load specific page content if a page number is selected
+document.querySelectorAll(".page-numbers").forEach((pageNumber) => {
+    pageNumber.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (e.target.classList.contains("page-number")) {
+            let selectedPageNumber = e.target.getAttribute("page");
+            currentPage = selectedPageNumber;
+
+            let targetPage = "https://swapi.dev/api/starships/?page=" + currentPage;
+            getNextPageOfStarships(targetPage);
+        }
+    });
+
+});
